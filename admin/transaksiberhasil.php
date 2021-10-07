@@ -9,6 +9,9 @@
 <table>
 <tr>
 <td>
+	<div class="text-left">
+		<label for="exampleInputEmail1">Filter Bulan</label>
+	</div>
   <select name="bln" class="form-control">
                   <option>--Pilih--</option>
                   <option value="01">Januari</option>
@@ -26,7 +29,28 @@
                 </select>
 </select>
 </td>
+<td class="w-50">
+	<div class="text-left">
+		<label for="exampleInputEmail1">Filter Jenis Seni</label>
+	</div>
+	<select name="tipe"  class="form-control" required="required">
+	<option selected="selected" disabled="disabled"></option>
+	<?php  
+	$sql = $pdo->query("SELECT * FROM tb_jenis_seni");
+	while ($caridata = $sql->fetch()) {
+	$nama = $caridata['nama']; 
+	// $id = $caridata['id'];
+	
+	?>
+	<option value="<?= $nama ?>"><?= $nama ?></option>
+	<?php } ?>
+	
+	</select>
+</td>
 <td>
+<div class="text-left">
+	<label for="exampleInputEmail1">Filter Tahun</label>
+</div>
 <select name="thn" class="form-control">
 <?php
 $mulai= date('Y') - 50;
@@ -49,23 +73,25 @@ for($i = $mulai;$i<$mulai + 100;$i++){
 
     $bln = $_POST['bln'];
     $thn = $_POST['thn'];
+    $tipe = $_POST['tipe'];
 
   
 ?>
 
 <script>
 
-  window.location = 'transaksiberhasil.php?bln=<?php echo $bln; ?>&&thn=<?php echo $thn; ?>';
+  window.location = 'transaksiberhasil.php?bln=<?php echo $bln; ?>&&thn=<?php echo $thn; ?>&&tipe=<?php echo $tipe; ?>';
 
   </script>
 
   <?php } ?>
 
 <?php
-if(isset($_GET['bln'])&& isset($_GET['thn'])){
+if(isset($_GET['bln'])&& isset($_GET['thn']) && $tipe = $_GET['tipe']){
 
 $bln = $_GET['bln'];
 $thn = $_GET['thn'];
+$tipe = $_GET['tipe'];
  ?>
 			<div id="kanan">
 				<form method="post" action="proseskonfirmasi">
@@ -79,7 +105,7 @@ $thn = $_GET['thn'];
 					<th>Harga</th>
 				</tr>
 				<?php
-					$sql = $pdo->query("SELECT * FROM pemesanan WHERE month(created_at) = '$bln' AND year(created_at) = '$thn' ORDER BY idpesan ASC");
+					$sql = $pdo->query("SELECT * FROM pemesanan WHERE month(created_at) = '$bln' AND year(created_at) = '$thn' AND tipe= '$tipe' ORDER BY idpesan ASC");
 			  		while ($datax = $sql->fetch()) {
 			  		$idpesan = $datax['idpesan'];
 					$tipe = $datax['tipe'];
@@ -112,7 +138,7 @@ $thn = $_GET['thn'];
 			  </form>
 			</div>
 
-			<a href="laporan-transaksi.php?bln=<?php echo $bln; ?>&&thn=<?php echo $thn; ?>" target="_blank"><button id="laporan" style="width:150px;background:black;color:white;font-weight:bold;padding:4px;border:2px solid white; margin-top: 5px;">Cetak Laporan</button></a>
+			<a href="laporan-transaksi.php?bln=<?php echo $bln; ?>&&thn=<?php echo $thn; ?>&&tipe=<?php echo $tipe; ?>" target="_blank"><button id="laporan" style="width:150px;background:black;color:white;font-weight:bold;padding:4px;border:2px solid white; margin-top: 5px;">Cetak Laporan</button></a>
 		</center>
 	</div>
 <?php }?>

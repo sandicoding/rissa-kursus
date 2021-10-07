@@ -30,9 +30,12 @@ if(isset($_POST['klik'])) {
 		$ambilx = $_GET['id'];
 
 		$sqlx = $pdo->query("SELECT * FROM kursus WHERE idkursus='$ambilx'");
-		$datax = $sqlx->fetch();
+		$sql2 = $pdo->query("SELECT tb_kursus.idkursus, tb_kursus.bidang, tb_kursus.gambar, tb_kursus.harga, tb_jenis_seni.nama as nama, tb_jenis_seni.id from tb_kursus INNER JOIN tb_jenis_seni ON tb_kursus.id_tipe = tb_jenis_seni.id WHERE idkursus='$ambilx'");
+
+		$datax = $sql2->fetch();
 		$idkursus = $datax['idkursus'];
-		$tipe = $datax['tipe'];
+		$tipe = $datax['nama'];
+		$id_jenis = $datax['id'];
 		$bidang = $datax['bidang'];
 		
 		$gambar = $datax['gambar'];
@@ -106,7 +109,25 @@ if(isset($_POST['klik'])) {
 			<tr>
 				<td>Jenis Seni</td>
 				<td>
-				<input type="text" name="tipe" readonly="true" value="<?php echo $tipe ?>">
+				<!-- <input type="text" name="tipe" readonly="true" value="<?php echo $tipe?>"> -->
+				<select name="tipe" required="required" style="font-weight: bold; border: 2px solid #11022a;">
+						<!-- <option selected="selected" disabled="disabled">--Pilih--</option> -->
+						<?php  
+						$sql = $pdo->query("SELECT * FROM tb_jenis_seni");
+                        while ($caridata = $sql->fetch()) {
+                        $name = $caridata['nama']; 
+						$ids = $caridata['id'];
+						
+						?>
+						<?php if($ids == $id_jenis) { ?>
+						<option selected="selected" value="<?= $tipe ?>"   ><?= $tipe ?></option>
+						<?php }else{ ?>
+						<option  value="<?= $ids ?>"   ><?= $name ?></option>
+						<?php } ?>
+						<?php } ?>
+						
+						</select>
+					</td>
 					<input type="hidden" name="idkursus" readonly="true" value="<?php echo $idkursus ?>"></td>
 			</tr>
 			<tr>

@@ -5,10 +5,10 @@ $tipe = $_POST['tipe'];
 $bidang = $_POST['bidang'];
 
 $harga = $_POST['harga'];
-$harga_fix = explode("-", $harga, 1);
+
 $gambar = $_FILES['gambar']['name'];
 
-$sqlsimpan = $pdo->query("INSERT INTO tb_kursus VALUES('','$tipe', '$bidang', '$harga_fix', '$gambar')");
+$sqlsimpan = $pdo->query("INSERT INTO tb_kursus VALUES(null,'$tipe', '$bidang', '$harga', '$gambar')");
 
 
 move_uploaded_file($_FILES['gambar']['tmp_name'],"../../simpangambar/".$_FILES['gambar']['name']);

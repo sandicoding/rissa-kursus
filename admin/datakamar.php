@@ -8,14 +8,19 @@
 		<div id="datakamar">
 		<?php
 			include"fungsi/koneksi.php";
-			$sql = $pdo->query("SELECT * FROM kursus");
-			while($data = $sql->fetch()){
-				$id = $data['idkursus'];
-				$tipe = $data['tipe'];
-				$bidang = $data['bidang'];
+			$sql = $pdo->query("SELECT * FROM tb_kursus");
+			$sql2 = $pdo->query("SELECT tb_kursus.idkursus, tb_kursus.bidang, tb_kursus.gambar, tb_kursus.harga, tb_jenis_seni.nama as nama from tb_kursus INNER JOIN tb_jenis_seni ON tb_kursus.id_tipe = tb_jenis_seni.id");
+			// $data22 = $sql2->fetch();
+			// var_dump($data22);
+
+			while($data2 = $sql2->fetch()){
+				// var_dump($data2);
+				$id = $data2['idkursus'];
+				$tipe = $data2['nama'];
+				$bidang = $data2['bidang'];
 				
-				$harga = $data['harga'];
-				$gambar = $data['gambar'];
+				$harga = $data2['harga'];
+				$gambar = $data2['gambar'];
 
 				$bts = 25;
 				$tpak = strlen($tipe);

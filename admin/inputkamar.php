@@ -17,8 +17,16 @@
 					<td>
 						<select name="tipe" required="required" style="font-weight: bold; border: 2px solid #11022a;">
 						<option selected="selected" disabled="disabled">--Pilih--</option>
-						<option value="1">Seni Musik</option>
-						<option value="2">Seni Tari</option>
+						<?php  
+						$sql = $pdo->query("SELECT * FROM tb_jenis_seni");
+                        while ($caridata = $sql->fetch()) {
+                        $nama = $caridata['nama']; 
+						$id = $caridata['id'];
+						
+						?>
+						<option value="<?= $id ?>"><?= $nama ?></option>
+						<?php } ?>
+						
 						</select>
 					</td>
 				</tr>

@@ -8,7 +8,7 @@ $alamat = $_POST['alamat'];
 $telepon = $_POST['telepon'];
 $pass = md5($_POST['pass']);
 
-$sqlsimpan = $pdo->query("INSERT INTO tamu VALUES('', '$user', '$email', '$nama', '$alamat', '$telepon', '$pass', '')");
+$sqlsimpan = $pdo->query("INSERT INTO tamu VALUES(null, '$user', '$email', '$nama', '$alamat', '$telepon', '$pass', '')");
 
 echo"<script>swal({
         type: 'success',

@@ -67,7 +67,7 @@
 				
 				<td colspan="2" >
 				<?php
-					$sqly = $pdo->query("SELECT * FROM kursus WHERE idkursus=$idkursus");
+					$sqly = $pdo->query("SELECT * FROM tb_kursus WHERE idkursus=$idkursus");
 					while($datay = $sqly->fetch()){
 						$gambary = $datay['gambar'];
 				?>
