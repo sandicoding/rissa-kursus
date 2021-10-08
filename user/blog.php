@@ -12,8 +12,16 @@
 
 <section class="facilities2">
 	<h1>Informasi</h1><br>
+	<?php 
+		$sql = $pdo->query("SELECT * FROM tb_informasi");
+			$data = $sql->fetch();
+            $id = $data['id'];
+			$nama = $data['nama'];
+			$gambar = $data['gambar'];
+	?>
 	<p></p>
-	<div class="jadwal"><img src="../gambar/jadwalkursus.png" style="width: 500px" height="650px" ">
+	<h3><?= $nama ?></h3>
+	<div class="jadwal"><img src="../simpangambar/<?= $gambar ?>" style="width: 500px" height="650px" ">
 	</div>
 	
 
