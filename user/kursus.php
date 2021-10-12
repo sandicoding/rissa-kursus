@@ -27,7 +27,7 @@
     <div>
         <?php
 
-            $sql = $pdo->query("SELECT * FROM kursus");
+            // $sql = $pdo->query("SELECT * FROM kursus");
             $sql2 = $pdo->query("SELECT tb_kursus.idkursus, tb_kursus.bidang, tb_kursus.gambar, tb_kursus.harga, tb_jenis_seni.nama as nama from tb_kursus INNER JOIN tb_jenis_seni ON tb_kursus.id_tipe = tb_jenis_seni.id");
             while($data = $sql2->fetch()) {
                 $id = $data['idkursus'];
