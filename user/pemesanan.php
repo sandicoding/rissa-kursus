@@ -110,7 +110,7 @@ if(isset($_POST['klik'])) {
 				<td>Jenis Seni</td>
 				<td>
 				<!-- <input type="text" name="tipe" readonly="true" value="<?php echo $tipe?>"> -->
-				<select name="tipe" required="required" style="font-weight: bold; border: 2px solid #11022a;">
+				<select name="tipe" disabled required="required" style="font-weight: bold; border: 2px solid #11022a;">
 						<!-- <option selected="selected" disabled="disabled">--Pilih--</option> -->
 						<?php  
 						$sql = $pdo->query("SELECT * FROM tb_jenis_seni");
@@ -142,16 +142,16 @@ if(isset($_POST['klik'])) {
 			</tr>
 			<tr>
 				<td>Nama Lengkap</td>
-				<td><input type="text" name="nama" value="<?php echo $nama ?>">
+				<td><input type="text" disabled name="nama" value="<?php echo $nama ?>">
 					<input type="hidden" name="idtamu" readonly="true" value="<?php echo $id ?>"></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
-				<td><input type="text" name="alamat" value="<?php echo $alamat?>"></td>
+				<td><input type="text" disabled name="alamat" value="<?php echo $alamat?>"></td>
 			</tr>
 			<tr>
 				<td>No. Telepon</td>
-				<td><input type="text" name="telepon" value="<?php echo $telepon ?>"></td>
+				<td><input type="text" disabled name="telepon" value="<?php echo $telepon ?>"></td>
 			</tr>
 		
 			<tr>

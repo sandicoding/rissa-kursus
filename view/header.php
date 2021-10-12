@@ -23,8 +23,9 @@
 </head>
 <body>
 
+	div
 	<nav>
-		<div class="nav-links" id="navLinks">
+		<div class="nav-links container" id="navLinks">
 			<img src="gambar/music1.jpg" width="250px" >
 			<ul>
 				<li><a href="index">Beranda</a></li>

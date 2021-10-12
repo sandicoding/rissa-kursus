@@ -10,10 +10,10 @@
 		<?php
 			include "fungsi/koneksi.php";
 			$ambil = $_GET['id'];
-			$sql = $pdo->query("SELECT * FROM kursus WHERE idkursus='$ambil'");
+			$sql = $pdo->query("SELECT * FROM tb_kursus WHERE idkursus='$ambil'");
 			$data = $sql->fetch();
 			$id = $data['idkursus'];
-			$tipe = $data['tipe'];
+			$tipe = $data['id_tipe'];
 			$bidang = $data['bidang'];
 			
 			$harga = $data['harga'];
@@ -23,17 +23,30 @@
 		<form method="post" action="fungsi/prosesedit" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<td>ID Kursus</td>
-					<td><input type="text" required="required" name="id" value="<?php echo $id ?>"></td>
+					
+					<td><input type="text" hidden required="required" name="id" value="<?php echo $id ?>"></td>
 				</tr>
 				<tr>
 					<td>Jenis Seni</td>
-					<td><select name="edittipe" required="required"  selected="<?php echo $tipe ?>" style="font-weight: bold; border: 2px solid #B40301">
-						<option selected="selected" hidden="hidden">--Pilih--</option>
-						<option>Seni Musik</option>
-						<option>Seni Tari</option>
+					<td>
+					<select name="edittipe" required="required" style="font-weight: bold; border: 2px solid #11022a;">
+						<!-- <option selected="selected" disabled="disabled">--Pilih--</option> -->
+						<?php  
+						$sql = $pdo->query("SELECT * FROM tb_jenis_seni");
+                        while ($caridata = $sql->fetch()) {
+                        $name = $caridata['nama']; 
+						$ids = $caridata['id'];
+						
+						?>
+						<?php if($ids == $id_jenis) { ?>
+						<option selected="selected" value="<?= $tipe ?>"   ><?= $tipe ?></option>
+						<?php }else{ ?>
+						<option  value="<?= $ids ?>"   ><?= $name ?></option>
+						<?php } ?>
+						<?php } ?>
+						
 						</select>
-					</td>
+						</td>
 				</tr>
 				<tr>
 					<td>Jenis Kursus</td>

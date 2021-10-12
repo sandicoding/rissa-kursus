@@ -8,17 +8,25 @@ $gambar = $_FILES['editgambar']['name'];
 
 move_uploaded_file($_FILES['editgambar']['tmp_name'],"../../simpangambar/".$gambar);
 
-	if(empty($gambar)) {
-		$update = $pdo->query("UPDATE kursus SET idkursus='$id', tipe='$tipe', bidang='$bidang', harga='$harga' WHERE idkursus='$id'");
-		
+if(!preg_match("/^[0-9]*$/", $harga)){
+			echo"<script>alert('pastikan harga di input dengan number');document,location.href='../datakamar';</script>";
+		}else {
+           
 
-		echo "<script>alert ('Data telah diupdate');document.location.href='../datakamar';</script>";
-	}
-	elseif (!empty($gambar)) {
-		$update = $pdo->query("UPDATE kursus SET idkursus='$id', tipe='$tipe', bidang='$bidang',  harga='$harga', gambar='$gambar' WHERE idkursus='$id'");
+			if(empty($gambar)) {
+
 		
-		
-		echo "<script>alert ('Data telah diupdate');document.location.href='../datakamar';</script>";
-}
+					$update = $pdo->query("UPDATE tb_kursus SET idkursus='$id', id_tipe='$tipe', bidang='$bidang', harga='$harga' WHERE idkursus='$id'");
+					
+					echo "<script>alert ('Data telah diupdate');document.location.href='../datakamar';</script>";
+				}
+				elseif (!empty($gambar)) {
+				$update = $pdo->query("UPDATE tb_kursus SET idkursus='$id', id_tipe='$tipe', bidang='$bidang', harga='$harga' WHERE idkursus='$id'");
+					
+					
+					echo "<script>alert ('Data telah diupdate');document.location.href='../datakamar';</script>";
+			}
+        }
+	
 
 ?>
